@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { createTheme } from '@mui/material';
-import { blueGrey, deepOrange, grey, indigo } from '@mui/material/colors';
+import { blue, blueGrey, grey, indigo } from '@mui/material/colors';
 
 function useSwitchTheme() {
   const [mode, setMode] = useState<'light' | 'dark'>('dark');
@@ -34,17 +34,24 @@ function useSwitchTheme() {
               }
             : {
                 // palette values for dark mode
-                primary: deepOrange,
-                divider: deepOrange[700],
+                primary: blue,
+                divider: blue[700],
                 background: {
-                  default: '#121212',
-                  paper: '#121212',
+                  default: '#1A202C',
+                  paper: '#1A202C',
                 },
                 text: {
                   primary: '#fff',
                   secondary: grey[500],
                 },
               }),
+        },
+        typography: {
+          fontFamily: `"Roboto", "Helvetica", "Arial", sans-serif`,
+          fontSize: 14,
+          fontWeightLight: 300,
+          fontWeightRegular: 400,
+          fontWeightMedium: 500,
         },
       }),
     [mode]

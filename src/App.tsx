@@ -1,25 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Box, CssBaseline, IconButton, ThemeProvider } from '@mui/material';
+import useSwitchTheme from './app/UseSwitchTheme';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import Header from './futures/ui/header';
+import CityList from './futures/cities/CityList';
+import SocialFooter from './futures/ui/social';
 
 function App() {
+  const { theme, colorMode } = useSwitchTheme();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <>
+        <CssBaseline />
+
+        <Box sx={{ display: 'flex', justifyContent: 'end', alignItems: 'center', mr: 3, mt: 3 }}>
+          <IconButton size="large" onClick={colorMode.toggleColorMode}>
+            {theme.palette.mode === 'dark' ? <LightModeIcon /> : <DarkModeIcon />}
+          </IconButton>
+        </Box>
+        <Header />
+        <CityList />
+        <SocialFooter />
+      </>
+    </ThemeProvider>
   );
 }
 
