@@ -11,7 +11,7 @@ const Header = () => {
 
   return (
     <>
-      <Typography variant="h2" align="center" mt={1}>
+      <Typography variant="h2" align="center">
         Weather forecast
       </Typography>
       <Box
