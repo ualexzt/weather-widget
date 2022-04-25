@@ -31,7 +31,7 @@ If you want to test this project, follow the steps below!
 ```jsx
 git
 clone
-https://github.com/ualexzt/
+https://github.com/ualexzt/weather-widget
 ```
 
 + Enter the weather-widget folder
