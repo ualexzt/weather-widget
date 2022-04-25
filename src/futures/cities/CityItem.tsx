@@ -35,7 +35,7 @@ const CityItem = ({ city }: CityItemProps) => {
       </Box>
       <CardMedia
         component="img"
-        sx={{ width: 120 }}
+        sx={{ width: 100 }}
         image={`https://openweathermap.org/img/w/${data.weather[0].icon}.png`}
         alt="Weather now"
       ></CardMedia>

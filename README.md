@@ -14,9 +14,9 @@ A weather forecast query tool via API with React/Redux/Typescript/Axios
 
 ## 👊🏻 Thanks before starting...
 
-This project was created using the free Open Weather Map API:
+This project was created using the free Open Weather API:
 
-+ https://fcc-weather-api.glitch.me
++ https://openweathermap.org/api
 
 ## ❓ Purpose of the project
 

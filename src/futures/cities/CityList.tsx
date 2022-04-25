@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CityItem from './CityItem';
 import CityMain from './CityMain';
 import { Box, Grid, Pagination } from '@mui/material';
@@ -9,13 +9,18 @@ const CityList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(5);
   const pages = Math.ceil(cities.length / itemsPerPage);
-
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentCities = cities.slice(indexOfFirstItem, indexOfLastItem);
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setCurrentPage(value);
   };
+  useEffect(() => {
+    if (currentCities.length === 0 && currentPage > 1) {
+      setCurrentPage((state) => state - 1);
+    }
+  }, [currentCities]);
+
   return (
     <Grid
       container
@@ -36,7 +41,7 @@ const CityList = () => {
         </Box>
       </Grid>
       <Grid item xs={3}>
-        {currentCities.length > 0 && pages > 1 ? (
+        {pages > 1 ? (
           <Pagination
             count={pages}
             page={currentPage}

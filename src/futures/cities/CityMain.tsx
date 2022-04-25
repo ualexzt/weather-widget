@@ -18,7 +18,7 @@ const CityMain = () => {
       setLon(position.coords.longitude);
     });
   }, []);
-  console.log(data);
+
   return data ? (
     <Card sx={{ display: 'flex', maxWidth: 450 }}>
       <Box
@@ -46,7 +46,7 @@ const CityMain = () => {
       </Box>
       <Box sx={{ display: 'flex', flexDirection: 'column', p: 1 }}>
         <CardContent sx={{ flex: '1 0 auto', minWidth: 250 }}>
-          <Typography component="div" variant="h5" mb={1}>
+          <Typography component="div" variant="h5">
             {data?.name}
           </Typography>
 
@@ -57,7 +57,6 @@ const CityMain = () => {
             display="flex"
             flexDirection="row"
             alignItems="center"
-            mb={2}
             gap={2}
           >
             <AddLocationAltIcon /> Lon / Lat: {Math.round(lon)}°/{Math.round(lat)}°
