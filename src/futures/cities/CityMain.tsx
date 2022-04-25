@@ -1,14 +1,25 @@
-import React from 'react';
-import { Box, Card, CardContent, Typography } from '@mui/material';
-import WbSunnyIcon from '@mui/icons-material/WbSunny';
+import React, { useEffect, useState } from 'react';
+import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material';
 import AddLocationAltIcon from '@mui/icons-material/AddLocationAlt';
 import ThermostatIcon from '@mui/icons-material/Thermostat';
 import InvertColorsIcon from '@mui/icons-material/InvertColors';
 import ExpandIcon from '@mui/icons-material/Expand';
 import AirIcon from '@mui/icons-material/Air';
+import { weatherApi } from '../../app/weatherApi';
 
 const CityMain = () => {
-  return (
+  const [lat, setLet] = useState(0);
+  const [lon, setLon] = useState(0);
+  const { data } = weatherApi.useGetWeatherCoordQuery({ lat, lon });
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      setLet(position.coords.latitude);
+      setLon(position.coords.longitude);
+    });
+  }, []);
+  console.log(data);
+  return data ? (
     <Card sx={{ display: 'flex', maxWidth: 450 }}>
       <Box
         sx={{
@@ -16,22 +27,27 @@ const CityMain = () => {
           flexDirection: 'column',
           minWidth: 200,
           alignItems: 'center',
-          gap: 2,
+          gap: 1,
           p: 2,
         }}
       >
         <Typography component="div" variant="h2" align="center">
-          12&deg;
+          {Math.round(data.main.temp - 273.15)}°
         </Typography>
-        <WbSunnyIcon sx={{ fontSize: 100 }} />
+        <CardMedia
+          component="img"
+          sx={{ width: 120 }}
+          image={`https://openweathermap.org/img/w/${data.weather[0].icon}.png`}
+          alt="Weather now"
+        ></CardMedia>
         <Typography component="div" variant="body1" align="center">
-          Freezy
+          {data.weather[0].main}
         </Typography>
       </Box>
       <Box sx={{ display: 'flex', flexDirection: 'column', p: 1 }}>
         <CardContent sx={{ flex: '1 0 auto', minWidth: 250 }}>
           <Typography component="div" variant="h5" mb={1}>
-            Kyiv
+            {data?.name}
           </Typography>
 
           <Typography
@@ -41,10 +57,10 @@ const CityMain = () => {
             display="flex"
             flexDirection="row"
             alignItems="center"
-            mb={5}
+            mb={2}
             gap={2}
           >
-            <AddLocationAltIcon /> Lon / Lat 44°/23°
+            <AddLocationAltIcon /> Lon / Lat: {Math.round(lon)}°/{Math.round(lat)}°
           </Typography>
           <Typography
             variant="subtitle1"
@@ -55,7 +71,8 @@ const CityMain = () => {
             alignItems="center"
             gap={2}
           >
-            <ThermostatIcon /> High / Low 26°/11°
+            <ThermostatIcon /> High / Low {Math.round(data.main.temp_max - 273.15)}°/{' '}
+            {Math.round(data.main.temp_min - 273.15)}°
           </Typography>
 
           <Typography
@@ -68,7 +85,7 @@ const CityMain = () => {
             gap={2}
           >
             <InvertColorsIcon />
-            Humidity: 70%
+            Humidity: {data.main.humidity}%
           </Typography>
           <Typography
             variant="subtitle1"
@@ -80,7 +97,7 @@ const CityMain = () => {
             gap={2}
           >
             <ExpandIcon />
-            Pressure: 1030.1 mb
+            Pressure: {data.main.pressure} mb
           </Typography>
           <Typography
             variant="subtitle1"
@@ -92,12 +109,13 @@ const CityMain = () => {
             gap={2}
           >
             <AirIcon />
-            Wind: 13 km/h
+            Wind: {data.wind.speed} km/h
           </Typography>
         </CardContent>
-        <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}></Box>
       </Box>
     </Card>
+  ) : (
+    <h1>No data</h1>
   );
 };
 

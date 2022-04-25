@@ -7,6 +7,7 @@ interface CitySate {
 const initialState: CitySate = {
   cities: [],
 };
+
 export const citySlice = createSlice({
   name: 'cities',
   initialState,

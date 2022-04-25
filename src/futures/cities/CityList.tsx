@@ -29,14 +29,14 @@ const CityList = () => {
         <CityMain />
       </Grid>
       <Grid item xs={3}>
-        <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2 }}>
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 2 }}>
           {currentCities.map((city) => (
             <CityItem key={city} city={city} />
           ))}
         </Box>
       </Grid>
       <Grid item xs={3}>
-        {currentCities.length > 0 ? (
+        {currentCities.length > 0 && pages > 1 ? (
           <Pagination
             count={pages}
             page={currentPage}

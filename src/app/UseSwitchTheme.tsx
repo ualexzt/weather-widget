@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { createTheme } from '@mui/material';
-import { blue, blueGrey, grey, indigo } from '@mui/material/colors';
+import { blue, grey, indigo } from '@mui/material/colors';
 
 function useSwitchTheme() {
   const [mode, setMode] = useState<'light' | 'dark'>('dark');
@@ -24,8 +24,8 @@ function useSwitchTheme() {
                 primary: indigo,
                 divider: indigo[200],
                 background: {
-                  default: blueGrey[50],
-                  paper: blueGrey[50],
+                  default: '#fff',
+                  paper: blue[100],
                 },
                 text: {
                   primary: grey[900],
